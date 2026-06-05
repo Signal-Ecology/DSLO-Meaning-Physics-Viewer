@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SusceptibilityWindows",
+  "type": "object",
+  "properties": {
+    "field": { "type": "string", "const": "susceptibility-windows" },
+    "version": { "type": "string" },
+    "description": { "type": "string" },
+    "units": { "type": "string" },
+    "windows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "region": { "type": "string" },
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "index": { "type": "number" }
+        },
+        "required": ["region", "x", "y", "index"]
+      }
+    },
+    "metadata": { "type": "object" }
+  },
+  "required": ["field", "version", "windows"]
+}
