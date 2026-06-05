@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DriftField",
+  "type": "object",
+  "properties": {
+    "field": { "type": "string", "const": "drift" },
+    "version": { "type": "string" },
+    "description": { "type": "string" },
+    "units": { "type": "string" },
+    "grid": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "value": { "type": "number" }
+        },
+        "required": ["x", "y", "value"]
+      }
+    },
+    "metadata": { "type": "object" }
+  },
+  "required": ["field", "version", "grid"]
+}
