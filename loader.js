@@ -1,7 +1,7 @@
 class Engine {
   static async loadJSON(url) {
     const response = await fetch(url);
-    if (!response.ok) {
+    if (!response.ok)      {
       throw new Error(`Failed to load ${url}: ${response.status}`);
     }
     return await response.json();
@@ -10,6 +10,7 @@ class Engine {
   static async loadFields() {
     const base = "https://signal-ecology.github.io/DSLO-Meaning-Physics-Viewer";
 
+    // EXACT schema filenames
     const schemaPaths = {
       drift: `${base}/schemas/DriftField.schema.json`,
       continuity: `${base}/schemas/ContinuityField.schema.json`,
@@ -19,6 +20,7 @@ class Engine {
       susceptibility: `${base}/schemas/SusceptibilityWindows.schema.json`
     };
 
+    // EXACT field filenames
     const fieldPaths = {
       drift: `${base}/fields/DriftField.json`,
       continuity: `${base}/fields/ContinuityField.json`,
