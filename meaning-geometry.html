@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Meaning Geometry Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #canvas {
+      border: 1px solid #ccc;
+      background: #fff;
+      display: block;
+      margin-bottom: 20px;
+    }
+    #output {
+      background: #111;
+      color: #0f0;
+      padding: 12px;
+      font-size: 12px;
+      white-space: pre;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Meaning Geometry Map</h1>
+  <p>This viewer loads the DSLO meaning‑physics fields and displays a simple geometry projection.</p>
+
+  <canvas id="canvas" width="800" height="300"></canvas>
+
+  <h2>Loaded Field Data</h2>
+  <pre id="output">Loading…</pre>
+
+  <script src="loader.js"></script>
+
+  <script>
+    function drawGeometry(fields) {
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const colors = {
+        drift: "#ff6b6b",
+        continuity: "#4ecdc4",
+        curvature: "#1a535c",
+        collapse: "#ffe66d",
+        "restoration-flows": "#ff9f1c",
+        susceptibility: "#5c7cfa"
+      };
+
+      const labels = Object.keys(colors);
+      const spacing = canvas.width / (labels.length + 1);
+
+      labels.forEach((label, i) => {
+        const x = spacing * (i + 1);
+        const y = canvas.height / 2;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, Math.PI * 2);
+        ctx.fillStyle = colors[label];
+        ctx.fill();
+
+        ctx.fillStyle = "#000";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(label, x, y + 50);
+      });
+    }
+
+    Engine.loadFields().then(fields => {
+      document.getElementById("output").textContent =
+        JSON.stringify(fields, null, 2);
+
+      drawGeometry(fields);
+    }).catch(err => {
+      document.getElementById("output").textContent =
+        "Error loading fields:\n" + err;
+    });
+  </script>
+
+</body>
+</html>
