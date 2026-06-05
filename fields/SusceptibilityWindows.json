@@ -1,0 +1,11 @@
+{
+  "field": "susceptibility-windows",
+  "version": "0.1",
+  "description": "Regions where small perturbations produce large semantic changes.",
+  "windows": [],
+  "units": "susceptibility-index",
+  "metadata": {
+    "generated": "manual-v0.1",
+    "status": "placeholder"
+  }
+}
