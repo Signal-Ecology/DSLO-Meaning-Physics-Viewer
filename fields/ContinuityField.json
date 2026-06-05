@@ -1,0 +1,11 @@
+{
+  "field": "continuity",
+  "version": "0.1",
+  "description": "Continuity field representing identity stability and trajectory coherence.",
+  "grid": [],
+  "units": "continuity-strength",
+  "metadata": {
+    "generated": "manual-v0.1",
+    "status": "placeholder"
+  }
+}
