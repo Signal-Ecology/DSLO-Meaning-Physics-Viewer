@@ -1,96 +1,58 @@
-// DSLO Meaning Physics Engine — Shared Loader (v0.3)
-// Hyphen-safe field identities + schema validation for all six physics fields.
+class Engine {
+  static async loadJSON(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to load ${url}: ${response.status}`);
+    }
+    return await response.json();
+  }
 
-const Engine = {
-    fields: {
-        drift: null,
-        continuity: null,
-        curvature: null,
-        collapse: null,
-        "restoration-flows": null,
-        susceptibility: null
-    },
+  static async loadFields() {
+    const base = "https://signal-ecology.github.io/DSLO-Meaning-Physics-Viewer";
 
-    schemas: {
-        drift: null,
-        continuity: null,
-        curvature: null,
-        collapse: null,
-        "restoration-flows": null,
-        susceptibility: null
-    },
+    const schemaPaths = {
+      drift: `${base}/schemas/DriftField.schema.json`,
+      continuity: `${base}/schemas/ContinuityField.schema.json`,
+      curvature: `${base}/schemas/CurvatureField.schema.json`,
+      collapse: `${base}/schemas/CollapseBoundaries.schema.json`,
+      "restoration-flows": `${base}/schemas/RestorationFlows.schema.json`,
+      susceptibility: `${base}/schemas/SusceptibilityWindows.schema.json`
+    };
 
-    async loadJSON(path) {
-        const response = await fetch(path);
-        if (!response.ok) {
-            throw new Error(`Failed to load ${path}: ${response.status}`);
-        }
-        return response.json();
-    },
+    const fieldPaths = {
+      drift: `${base}/fields/DriftField.json`,
+      continuity: `${base}/fields/ContinuityField.json`,
+      curvature: `${base}/fields/CurvatureField.json`,
+      collapse: `${base}/fields/CollapseBoundaries.json`,
+      "restoration-flows": `${base}/fields/RestorationFlows.json`,
+      susceptibility: `${base}/fields/SusceptibilityWindows.json`
+    };
 
-    async loadSchemas() {
-        this.schemas["drift"] = await this.loadJSON("../schemas/DriftField.schema.json");
-        this.schemas["continuity"] = await this.loadJSON("../schemas/ContinuityField.schema.json");
-        this.schemas["curvature"] = await this.loadJSON("../schemas/CurvatureField.schema.json");
-        this.schemas["collapse"] = await this.loadJSON("../schemas/CollapseBoundaries.schema.json");
-        this.schemas["restoration-flows"] = await this.loadJSON("../schemas/RestorationFlows.schema.json");
-        this.schemas["susceptibility"] = await this.loadJSON("../schemas/SusceptibilityWindows.schema.json");
-    },
+    const schemas = {};
+    const fields = {};
 
-    async loadFields() {
-        await this.loadSchemas();
+    // Load schemas
+    for (const key of Object.keys(schemaPaths)) {
+      try {
+        schemas[key] = await this.loadJSON(schemaPaths[key]);
+        console.log(`Loaded schema: ${key}`);
+      } catch (err) {
+        console.error(`Schema load failed for ${key}:`, err);
+      }
+    }
 
-        this.fields["drift"] = await this.loadJSON("../fields/DriftField.json");
-        this.fields["continuity"] = await this.loadJSON("../fields/ContinuityField.json");
-        this.fields["curvature"] = await this.loadJSON("../fields/CurvatureField.json");
-        this.fields["collapse"] = await this.loadJSON("../fields/CollapseBoundaries.json");
-        this.fields["restoration-flows"] = await this.loadJSON("../fields/RestorationFlows.json");
-        this.fields["susceptibility"] = await this.loadJSON("../fields/SusceptibilityWindows.json");
+    // Load fields
+    for (const key of Object.keys(fieldPaths)) {
+      try {
+        fields[key] = await this.loadJSON(fieldPaths[key]);
+        console.log(`Loaded field: ${key}`);
+      } catch (err) {
+        console.error(`Field load failed for ${key}:`, err);
+      }
+    }
 
-        this.validateField("drift", this.fields["drift"], this.schemas["drift"]);
-        this.validateField("continuity", this.fields["continuity"], this.schemas["continuity"]);
-        this.validateField("curvature", this.fields["curvature"], this.schemas["curvature"]);
-        this.validateField("collapse", this.fields["collapse"], this.schemas["collapse"]);
-        this.validateField("restoration-flows",
-            this.fields["restoration-flows"],
-            this.schemas["restoration-flows"]
-        );
-        this.validateField("susceptibility", this.fields["susceptibility"], this.schemas["susceptibility"]);
-
-        return this.fields;
-    },
-
-    validateField(name, data, schema) {
-        if (!schema || !schema.properties) {
-            console.warn(`No schema found for ${name}`);
-            return;
-        }
-
-        if (schema.required) {
-            schema.required.forEach(req => {
-                if (!(req in data)) {
-                    throw new Error(`Validation error in ${name}: missing required field "${req}"`);
-                }
-            });
-        }
-
-        Object.entries(schema.properties).forEach(([key, rule]) => {
-            if (rule.const && data[key] !== rule.const) {
-                throw new Error(
-                    `Validation error in ${name}: field "${key}" must be "${rule.const}", got "${data[key]}"`
-                );
-            }
-        });
-
-        console.log(`✓ ${name} validated successfully`);
-    },
-
-    getDrift() { return this.fields["drift"]; },
-    getContinuity() { return this.fields["continuity"]; },
-    getCurvature() { return this.fields["curvature"]; },
-    getCollapseBoundaries() { return this.fields["collapse"]; },
-    getRestorationFlows() { return this.fields["restoration-flows"]; },
-    getSusceptibilityWindows() { return this.fields["susceptibility"]; }
-};
+    return { schemas, fields };
+  }
+}
 
 window.Engine = Engine;
