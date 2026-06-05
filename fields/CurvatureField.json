@@ -1,0 +1,11 @@
+{
+  "field": "curvature",
+  "version": "0.1",
+  "description": "Curvature field representing non-linear deformation of meaning geometry.",
+  "grid": [],
+  "units": "curvature-index",
+  "metadata": {
+    "generated": "manual-v0.1",
+    "status": "placeholder"
+  }
+}
