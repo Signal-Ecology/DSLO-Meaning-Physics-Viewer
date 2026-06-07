@@ -2,14 +2,11 @@
   "field": "collapse-boundaries",
   "version": "0.1",
   "description": "Boundary surfaces defining no-cross regions where semantic collapse occurs.",
-  "boundaries": [],
   "units": "boundary-surface",
   "metadata": {
     "generated": "manual-v0.1",
     "status": "placeholder"
-  }
-}
-{
+  },
   "boundaries": [
     { "x": 200, "y": 100, "width": 120, "height": 60 }
   ]
