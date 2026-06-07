@@ -7,16 +7,25 @@ async function loadFields() {
 const canvas = document.getElementById('geom-canvas');
 const ctx = canvas.getContext('2d');
 
+// Canonical DSLO palette (shared with meaning-geometry.html)
+const COLORS = {
+  drift: "#ff6666",
+  continuity: "#66aaff",
+  curvature: "#ffcc66",
+  collapse: "#cc66ff",
+  restoration: "#66cc66",
+  susceptibility: "#ff99bb"
+};
+
 // Structured DSLO geometry — six field nodes
 const fields = [
-  { name: 'Drift', x: 120, y: 220, color: '#ff6666' },
-  { name: 'Continuity', x: 260, y: 140, color: '#66aaff' },
-  { name: 'Curvature', x: 400, y: 220, color: '#ffcc66' },
-  { name: 'Collapse', x: 540, y: 140, color: '#cc66ff' },
-  { name: 'Restoration', x: 680, y: 220, color: '#66cc66' },
-  { name: 'Susceptibility', x: 820, y: 140, color: '#ff99bb' }
+  { name: 'Drift', x: 120, y: 220, color: COLORS.drift },
+  { name: 'Continuity', x: 260, y: 140, color: COLORS.continuity },
+  { name: 'Curvature', x: 400, y: 220, color: COLORS.curvature },
+  { name: 'Collapse', x: 540, y: 140, color: COLORS.collapse },
+  { name: 'Restoration', x: 680, y: 220, color: COLORS.restoration },
+  { name: 'Susceptibility', x: 820, y: 140, color: COLORS.susceptibility }
 ];
-
 
 // Background
 ctx.fillStyle = '#ffffff';
@@ -46,13 +55,15 @@ for (let i = 0; i < fields.length - 1; i++) {
   ctx.lineTo(b.x, b.y);
   ctx.stroke();
 }
+
 // ------------------------------------------------------------
 // Load DSLO JSON field data and render overlays
 // ------------------------------------------------------------
 loadFields().then(fieldsData => {
-  // Example: draw drift vectors if present
+
+  // Drift vectors
   if (fieldsData.drift && fieldsData.drift.vectors) {
-    ctx.strokeStyle = '#ff5555';
+    ctx.strokeStyle = COLORS.drift;
     ctx.lineWidth = 1;
 
     fieldsData.drift.vectors.forEach(v => {
@@ -63,9 +74,9 @@ loadFields().then(fieldsData => {
     });
   }
 
-  // Example: draw susceptibility windows
+  // Susceptibility windows
   if (fieldsData.susceptibility && fieldsData.susceptibility.windows) {
-    ctx.fillStyle = 'rgba(255, 136, 170, 0.25)';
+    ctx.fillStyle = COLORS.susceptibility + "40"; // 25% alpha
 
     fieldsData.susceptibility.windows.forEach(w => {
       ctx.beginPath();
@@ -74,9 +85,9 @@ loadFields().then(fieldsData => {
     });
   }
 
-  // Example: draw collapse boundaries
+  // Collapse boundaries
   if (fieldsData.collapse && fieldsData.collapse.boundaries) {
-    ctx.strokeStyle = '#aa55ff';
+    ctx.strokeStyle = COLORS.collapse;
     ctx.setLineDash([4, 4]);
 
     fieldsData.collapse.boundaries.forEach(b => {
@@ -88,9 +99,9 @@ loadFields().then(fieldsData => {
     ctx.setLineDash([]);
   }
 
-  // Example: draw restoration flows
+  // Restoration flows
   if (fieldsData.restoration && fieldsData.restoration.flows) {
-    ctx.strokeStyle = '#55cc55';
+    ctx.strokeStyle = COLORS.restoration;
 
     fieldsData.restoration.flows.forEach(f => {
       ctx.beginPath();
@@ -100,6 +111,4 @@ loadFields().then(fieldsData => {
     });
   }
 
-  // Example: draw continuity or curvature vectors
-  // (depends on your JSON structure)
 });
