@@ -2,6 +2,11 @@
   "field": "restoration-flows",
   "version": "0.1",
   "description": "Semantic restoration flows that return the system to a stable region after drift or collapse.",
+  "units": "restoration-flow",
+  "metadata": {
+    "generated": "manual-v0.1",
+    "status": "prototype"
+  },
   "flows": [
     {
       "id": "restore.baseline",
@@ -14,16 +19,10 @@
       "type": "invariant-correction",
       "description": "Re-align meaning with invariant anchors after drift.",
       "vector": [1, 0]
+    },
+    {
+      "from": { "x": 100, "y": 200 },
+      "to": { "x": 200, "y": 250 }
     }
-  ],
-  "units": "restoration-flow",
-  "metadata": {
-    "generated": "manual-v0.1",
-    "status": "prototype"
-  }
-}
-{
-  "flows": [
-    { "from": { "x": 100, "y": 200 }, "to": { "x": 200, "y": 250 } }
   ]
 }
