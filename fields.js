@@ -1,4 +1,3 @@
-// Load all DSLO field JSON files using the shared Engine loader
 async function loadFields() {
   await Engine.loadFields();
   return Engine.fields;
@@ -7,10 +6,8 @@ async function loadFields() {
 loadFields().then(fields => {
   const root = document.getElementById('field-root');
 
-  // Get field names (drift, continuity, curvature, collapse, restoration, susceptibility)
   const names = Object.keys(fields);
 
-  // Build UI
   root.innerHTML = `
     <h2>Available DSLO Fields</h2>
     <ul>
@@ -19,14 +16,12 @@ loadFields().then(fields => {
     <pre id="field-details" style="padding: 12px; background: #f7f7f7; border: 1px solid #ccc;"></pre>
   `;
 
-  // Wire up click handlers
   document.querySelectorAll('button[data-field]').forEach(btn => {
     btn.onclick = () => {
       const name = btn.dataset.field;
-      const details = fields[name];
-
       document.getElementById('field-details').innerText =
-        JSON.stringify(details, null, 2);
+        JSON.stringify(fields[name], null, 2);
     };
   });
 });
+
