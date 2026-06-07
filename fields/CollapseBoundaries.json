@@ -9,3 +9,8 @@
     "status": "placeholder"
   }
 }
+{
+  "boundaries": [
+    { "x": 200, "y": 100, "width": 120, "height": 60 }
+  ]
+}
