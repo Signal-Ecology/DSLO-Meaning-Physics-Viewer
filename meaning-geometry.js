@@ -9,13 +9,14 @@ const ctx = canvas.getContext('2d');
 
 // Structured DSLO geometry — six field nodes
 const fields = [
-  { name: 'Drift', x: 100, y: 200, color: '#ff5555' },
-  { name: 'Continuity', x: 220, y: 120, color: '#55aaff' },
-  { name: 'Curvature', x: 340, y: 200, color: '#ffaa00' },
-  { name: 'Collapse', x: 460, y: 120, color: '#aa55ff' },
-  { name: 'Restoration', x: 580, y: 200, color: '#55cc55' },
-  { name: 'Susceptibility', x: 700, y: 120, color: '#ff88aa' }
+  { name: 'Drift', x: 120, y: 220, color: '#ff6666' },
+  { name: 'Continuity', x: 260, y: 140, color: '#66aaff' },
+  { name: 'Curvature', x: 400, y: 220, color: '#ffcc66' },
+  { name: 'Collapse', x: 540, y: 140, color: '#cc66ff' },
+  { name: 'Restoration', x: 680, y: 220, color: '#66cc66' },
+  { name: 'Susceptibility', x: 820, y: 140, color: '#ff99bb' }
 ];
+
 
 // Background
 ctx.fillStyle = '#ffffff';
