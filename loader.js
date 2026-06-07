@@ -52,8 +52,12 @@ class Engine {
         console.error(`Field load failed for ${key}:`, err);
       }
     }
+    
+    // FIX: store results on Engine
+  this.schemas = schemas;
+  this.fields = fields;
 
-    return { schemas, fields };
+  return { schemas, fields };
   }
 }
 
