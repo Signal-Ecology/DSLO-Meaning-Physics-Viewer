@@ -1,6 +1,6 @@
 async function loadFields() {
-  await Engine.loadFields();
-  return Engine.fields;
+  const result = await Engine.loadFields();
+  return result.fields;   // <-- FIX: return the actual fields object
 }
 
 loadFields().then(fields => {
@@ -24,4 +24,3 @@ loadFields().then(fields => {
     };
   });
 });
-
