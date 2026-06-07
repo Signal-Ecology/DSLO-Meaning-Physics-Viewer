@@ -1,2 +1,2 @@
-document.getElementById('field-root').innerText =
-  'Field Viewer placeholder – ready for DSLO field visualizations.';
+document.getElementById('fields-root').innerText =
+  'Fields viewer loaded.';
