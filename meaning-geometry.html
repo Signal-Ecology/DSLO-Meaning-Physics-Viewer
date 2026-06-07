@@ -4,18 +4,11 @@
   <meta charset="UTF-8">
   <title>Meaning Geometry Map</title>
   <style>
-   <nav style="padding: 8px; border-bottom: 1px solid #ccc; margin-bottom: 16px;">
-  <a href="meaning-geometry.html" style="margin-right: 16px;">Geometry</a>
-  <a href="fields.html" style="margin-right: 16px;">Fields</a>
-  <a href="moments.html" style="margin-right: 16px;">Moments</a>
-  <a href="about.html" style="margin-right: 16px;">About</a>
-</nav>
- 
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
     }
-    #canvas {
+    #canvas, #geom-canvas {
       border: 1px solid #ccc;
       background: #fff;
       display: block;
@@ -31,22 +24,24 @@
     }
   </style>
 </head>
+
 <body>
+
   <nav style="padding: 8px; border-bottom: 1px solid #ccc; margin-bottom: 16px;">
-  <a href="meaning-geometry.html" style="margin-right: 16px;">Geometry</a>
-  <a href="fields.html" style="margin-right: 16px;">Fields</a>
-  <a href="moments.html" style="margin-right: 16px;">Moments</a>
-  <a href="about.html" style="margin-right: 16px;">About</a>
-</nav>
+    <a href="meaning-geometry.html" style="margin-right: 16px;">Geometry</a>
+    <a href="fields.html" style="margin-right: 16px;">Fields</a>
+    <a href="moments.html" style="margin-right: 16px;">Moments</a>
+    <a href="about.html" style="margin-right: 16px;">About</a>
+  </nav>
 
-
- <canvas id="geom-canvas" width="800" height="400" style="border:1px solid #ccc;"></canvas>
-<script src="meaning-geometry.js"></script>
-
+  <!-- TOP GEOMETRY VIEW -->
+  <canvas id="geom-canvas" width="800" height="400"></canvas>
+  <script src="meaning-geometry.js"></script>
 
   <h1>Meaning Geometry Map</h1>
   <p>This viewer loads the DSLO meaning‑physics fields and displays a simple geometry projection.</p>
 
+  <!-- BOTTOM STRAIGHT-LINE VIEW -->
   <canvas id="canvas" width="800" height="300"></canvas>
 
   <h2>Loaded Field Data</h2>
@@ -55,22 +50,23 @@
   <script src="loader.js"></script>
 
   <script>
+    // Canonical DSLO palette (shared by both renderers)
+    const COLORS = {
+      drift: "#ff6666",
+      continuity: "#66aaff",
+      curvature: "#ffcc66",
+      collapse: "#cc66ff",
+      "restoration-flows": "#66cc66",
+      susceptibility: "#ff99bb"
+    };
+
     function drawGeometry(fields) {
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const colors = {
-        drift: "#ff6666",
-        continuity: "#66aaff",
-        curvature: "ffcc66",
-        collapse: "cc66ff",
-        "restoration-flows": "#66cc66",
-        susceptibility: "#ff99bb"
-      };
-
-      const labels = Object.keys(colors);
+      const labels = Object.keys(COLORS);
       const spacing = canvas.width / (labels.length + 1);
 
       labels.forEach((label, i) => {
@@ -79,7 +75,7 @@
 
         ctx.beginPath();
         ctx.arc(x, y, 30, 0, Math.PI * 2);
-        ctx.fillStyle = colors[label];
+        ctx.fillStyle = COLORS[label];
         ctx.fill();
 
         ctx.fillStyle = "#000";
