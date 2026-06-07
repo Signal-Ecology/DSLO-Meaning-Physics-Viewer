@@ -8,7 +8,7 @@
       font-family: Arial, sans-serif;
       margin: 20px;
     }
-    #canvas, #geom-canvas {
+    #canvas {
       border: 1px solid #ccc;
       background: #fff;
       display: block;
@@ -34,25 +34,28 @@
     <a href="about.html" style="margin-right: 16px;">About</a>
   </nav>
 
-  <!-- TOP GEOMETRY VIEW -->
-  <canvas id="geom-canvas" width="800" height="400"></canvas>
-
-  <!-- IMPORTANT: Engine FIRST -->
-  <script src="loader.js"></script>
-
-  <!-- Geometry SECOND -->
-  <script src="meaning-geometry.js"></script>
-
   <h1>Meaning Geometry Map</h1>
   <p>This viewer loads the DSLO meaning‑physics fields and displays a simple geometry projection.</p>
 
-  <!-- BOTTOM STRAIGHT-LINE VIEW -->
+  <!-- ONLY the plain circles -->
   <canvas id="canvas" width="800" height="300"></canvas>
 
   <h2>Loaded Field Data</h2>
   <pre id="output">Loading…</pre>
 
- 
+  <!-- Load Engine -->
+  <script src="loader.js"></script>
+
+  <script>
+    // DSLO color palette
+    const COLORS = {
+      drift: "#ff6666",
+      continuity: "#66aaff",
+      curvature: "#ffcc66",
+      collapse: "#cc66ff",
+      "restoration-flows": "#66cc66",
+      susceptibility: "#ff99bb"
+    };
 
     function drawGeometry(fields) {
       const canvas = document.getElementById("canvas");
@@ -85,10 +88,7 @@
 
       drawGeometry(fields);
     });
- </script> 
- <script src="loader.js"></script>
- <script src="meaning-geometry.js"></script>
-
+  </script>
 
 </body>
 </html>
