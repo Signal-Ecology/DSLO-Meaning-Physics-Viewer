@@ -36,6 +36,11 @@
 
   <!-- TOP GEOMETRY VIEW -->
   <canvas id="geom-canvas" width="800" height="400"></canvas>
+
+  <!-- IMPORTANT: Engine FIRST -->
+  <script src="loader.js"></script>
+
+  <!-- Geometry SECOND -->
   <script src="meaning-geometry.js"></script>
 
   <h1>Meaning Geometry Map</h1>
@@ -47,11 +52,16 @@
   <h2>Loaded Field Data</h2>
   <pre id="output">Loading…</pre>
 
-  <script src="loader.js"></script>
-
   <script>
-   
-    
+    // Use the SAME COLORS defined in meaning-geometry.js
+    const COLORS = {
+      drift: "#ff6666",
+      continuity: "#66aaff",
+      curvature: "#ffcc66",
+      collapse: "#cc66ff",
+      "restoration-flows": "#66cc66",
+      susceptibility: "#ff99bb"
+    };
 
     function drawGeometry(fields) {
       const canvas = document.getElementById("canvas");
@@ -83,9 +93,6 @@
         JSON.stringify(fields, null, 2);
 
       drawGeometry(fields);
-    }).catch(err => {
-      document.getElementById("output").textContent =
-        "Error loading fields:\n" + err;
     });
   </script>
 
