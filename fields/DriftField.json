@@ -2,14 +2,12 @@
   "field": "drift",
   "version": "0.1",
   "description": "Drift tensor field representing directional semantic drift across the manifold.",
-  "grid": [],
   "units": "drift-magnitude",
   "metadata": {
     "generated": "manual-v0.1",
     "status": "placeholder"
-  }
-}
-{
+  },
+  "grid": [],
   "vectors": [
     { "x1": 100, "y1": 200, "x2": 150, "y2": 250 }
   ]
