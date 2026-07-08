@@ -7,7 +7,13 @@ Architecture: Deterministic, Execution‑Free, Non‑Generative, Non‑Probabili
 Scientific Anchor: DOI 10.5281/zenodo.21083055  
 Viewer Identity: Public‑Layer Geometry Instrument
 ---
+DSLO Field Context
+This model is part of the DSLO Semantic Substrate, a deterministic meaning‑physics framework defining substrate‑level invariants, signal ecology, and artificial cognition.
 
+Full DSLO documentation:
+https://www.tnopsi.com
+
+---
 DSLO‑Meaning‑Physics‑Viewer
 Interactive public viewer for DSLO Meaning Physics.
 
