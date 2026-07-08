@@ -17,7 +17,7 @@ Where the DSLO Meaning Physics Engine provides the deterministic field API, the 
 
 The Viewer performs no inference, no semantic generation, and no substrate modification.
 It is a viewer, a scientific instrument for public‑layer inspection of DSLO meaning‑physics fields.
-
+---
 Purpose
 The Viewer enables:
 
