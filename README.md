@@ -165,3 +165,6 @@ v0.1 is a stable, deterministic, schema‑validated public demonstrator.
 
 License
 See license.json in the DSLO substrate for licensing details.
+
+**Referenced DSLO v0.7 Artifacts**  
+**DOI Set — Substrate‑Skin (A0, A4, A5, A6, B1, F2)**
